@@ -1,0 +1,15 @@
+<app-listado-generico [listado]="peliculas">
+  <ng-container vacio>
+    <div>Este mensaje es personalizado para contenido <b>vacio</b></div>
+  </ng-container>
+  <!--No se puede tener 2 directivas estructurales dentro del mismo elemento html ngIf y ngFor en el mismo DIV no se puede-->
+  <ng-container contenido><!--el ng-container sirve para no mostrar el tag dentro del HTML final de la app-->
+  <div *ngFor="let pelicula of peliculas; let index = index" class="pelicula-contenedor">
+    <div>Pelicula {{index}}: {{pelicula.titulo }} <button style="margin-left: 1rem;" (click)="removerPelicula(index)">Remover</button></div>
+    <!--(click) es un binding de evento y removerPelicula(index) es la función que se llama desde listado-peliculas.component.ts 
+    pasandole el dato de index para remover-->
+    <div>{{pelicula.fechaLanzamiento | date:"yy-MMMM-dd" | uppercase}}</div>
+    <div>{{pelicula.precio | currency}}</div>
+  </div>
+  </ng-container>
+</app-listado-generico>
